@@ -92,7 +92,7 @@ const NavBar = () => {
         {/* Seção direita: Botão de troca de modo e links de autenticação */}
         <div className="flex items-center gap-2 md:gap-4">
           {/* Botão de troca de modo */}
-          <div className="rounded-lg hover:bg-zinc-100 active:bg-zinc-100 dark:hover:bg-zinc-800 dark:active:bg-zinc-800">
+          <div className="rounded-lg active:bg-zinc-100 dark:active:bg-zinc-800 [@media(hover:hover)]:hover:bg-zinc-100 dark:[@media(hover:hover)]:hover:bg-zinc-800">
             <ModeToggle />
           </div>
 

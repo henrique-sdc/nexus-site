@@ -9,8 +9,7 @@ const Footer = () => {
 
   useEffect(() => {
     const checkScrollTop = () => {
-      // Define um limite um pouco menor para o botão aparecer mais cedo
-      const showThreshold = 200; // Pixels a partir do topo
+      const showThreshold = 100;
       if (!showScrollTopButton && window.scrollY > showThreshold) {
         setShowScrollTopButton(true);
       } else if (showScrollTopButton && window.scrollY <= showThreshold) {
@@ -21,15 +20,28 @@ const Footer = () => {
     return () => window.removeEventListener("scroll", checkScrollTop);
   }, [showScrollTopButton]);
 
-  // --- Função para rolar ao topo (GARANTINDO SMOOTH) ---
+  // --- Função para rolar ao topo (SMOOTH + EVENTO CUSTOMIZADO) ---
   const scrollToTop = () => {
+    const scrollDurationEstimate = 400; // Tempo estimado em ms para a animação (ajuste se necessário)
+
     if (window?.scrollTo) {
       window.scrollTo({
         top: 0,
-        behavior: "smooth", // Essencial para animação suave
+        behavior: "smooth", // Mantém a animação suave
       });
+
+      // Dispara um evento customizado após um delay estimado para a animação
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("forceNavbarVisible"));
+      }, scrollDurationEstimate);
     } else {
+      // Fallback para rolagem instantânea se smooth scroll não for suportado
       window.scrollTo(0, 0);
+      // Dispara o evento imediatamente neste caso
+      console.log(
+        "[Footer] Disparando evento 'forceNavbarVisible' imediatamente (sem smooth)."
+      ); // Log para debug
+      window.dispatchEvent(new CustomEvent("forceNavbarVisible"));
     }
   };
 
@@ -53,7 +65,7 @@ const Footer = () => {
           {/* Botão Voltar ao Topo posicionado na extrema direita */}
           <Button
             aria-label="Voltar ao topo"
-            onClick={scrollToTop}
+            onClick={scrollToTop} // Chama a função modificada
             className={cn(
               "absolute right-0 top-1/2 -translate-y-1/2 h-10 w-10 rounded-lg p-0 bg-purple-600 text-white shadow-lg",
               "hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800",
@@ -147,7 +159,7 @@ const Footer = () => {
           </p>
           <Button
             aria-label="Voltar ao topo"
-            onClick={scrollToTop}
+            onClick={scrollToTop} // Chama a função modificada
             className={cn(
               "h-10 w-10 rounded-lg p-0 bg-purple-600 text-white shadow-lg",
               "hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800",

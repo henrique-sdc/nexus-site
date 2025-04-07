@@ -90,7 +90,7 @@ export const DashboardNavbar: React.FC<DashboardNavbarProps> = ({
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 sm:px-6 dark:border-zinc-700 dark:bg-zinc-900 transition-transform duration-300",
+        "sticky top-0 z-40 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 sm:px-6 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 transition-transform duration-300",
         isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
@@ -143,11 +143,28 @@ export const DashboardNavbar: React.FC<DashboardNavbarProps> = ({
         <div
           ref={searchMobileContainerRef}
           className={cn(
-            "relative flex items-center md:hidden overflow-hidden transition-all duration-300 ease-in-out h-10",
-            !searchActive &&
-              "w-10 border border-input dark:border-zinc-700 bg-background hover:bg-zinc-100 active:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:hover:bg-zinc-700 rounded-md justify-center",
-            searchActive &&
-              "absolute left-4 right-4 w-[calc(100%-2rem)] max-w-none border border-input dark:border-zinc-700 bg-background dark:bg-zinc-900 rounded-md"
+            // --- Estilos Base e Transição ---
+            "relative flex items-center md:hidden overflow-hidden h-10",
+            // AQUI: Define a transição para TODAS as propriedades que mudam
+            "transition-all duration-300 ease-in-out", // <--- DURAÇÃO PRINCIPAL
+
+            // --- Estilos quando FECHADO (!searchActive) ---
+            !searchActive && [
+              "w-10", // Largura pequena
+              "border border-input dark:border-zinc-700",
+              "bg-background hover:bg-zinc-100 active:bg-zinc-100",
+              "dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:active:hover:bg-zinc-700",
+              "rounded-md justify-center",
+            ],
+
+            // --- Estilos quando ABERTO (searchActive) ---
+            searchActive && [
+              "absolute left-4 right-4", // Posicionamento absoluto
+              "w-[calc(100%-2rem)] max-w-none", // Largura total
+              "border border-input dark:border-zinc-700",
+              "bg-background dark:bg-zinc-900",
+              "rounded-md",
+            ]
           )}
         >
           <input
@@ -157,13 +174,16 @@ export const DashboardNavbar: React.FC<DashboardNavbarProps> = ({
             className={cn(
               "w-full h-full rounded-md border-0 bg-transparent py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0",
               "dark:text-zinc-300 dark:placeholder-zinc-400 pl-3 pr-10",
+              // --- Transição de Opacidade do Input ---
+              "transition-opacity duration-200 ease-in-out", // <--- DURAÇÃO OPACIDADE INPUT
               searchActive ? "opacity-100" : "opacity-0 pointer-events-none"
             )}
+            disabled={!searchActive} // Boa prática adicionar isso
           />
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground dark:text-zinc-400"
+            className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground dark:text-zinc-400" // Botão sempre posicionado absoluto DENTRO do container
             onClick={() => setSearchActive(!searchActive)}
             aria-label={searchActive ? "Fechar busca" : "Abrir busca"}
           >

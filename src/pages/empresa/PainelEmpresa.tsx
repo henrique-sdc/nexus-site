@@ -20,13 +20,6 @@ import { cn } from "src/lib/utils";
 import { Brain, FileCheck, Filter, Star, Users } from "lucide-react";
 import { DashboardNavbar } from "src/components/Dashboards/DashboardNavbar";
 import { EmpresaSidebar } from "src/components/Dashboards/Empresas/EmpresaSidebar";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/components/ui/select";
 import Footer from "src/components/Footer/Footer";
 
 const DashboardEmpresa: React.FC = () => {
@@ -125,7 +118,7 @@ const DashboardEmpresa: React.FC = () => {
           </div>
 
           {/* Conteúdo Principal (Main) - COR FUNDO MAIN PADRONIZADA */}
-          <main className="flex-1 flex flex-col p-4 md:p-6 gap-6 bg-gray-50/50 dark:bg-zinc-900/60 overflow-x-hidden">
+          <main className="flex-1 flex flex-col p-4 md:p-6 bg-gray-50/50 dark:bg-zinc-900/60 overflow-x-hidden">
             {" "}
             {/* COR PADRONIZADA: dark:bg-zinc-900/60 */}
             {/* ---- INÍCIO DO CONTEÚDO ESPECÍFICO DO DASHBOARD EMPRESA ---- */}
@@ -720,65 +713,112 @@ const DashboardEmpresa: React.FC = () => {
               </TabsContent>
             </Tabs>
             {/* Paginação - COR BORDA TOP PADRONIZADA */}
+            {/* Controles de Paginação */}
             <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 pt-4 border-t dark:border-zinc-700">
+              {/* Texto "Mostrando X-Y de Z" */}
               <div className="text-sm text-muted-foreground dark:text-gray-400 text-center md:text-left">
-                Mostrando <strong>1-3</strong> de <strong>12</strong> candidatos
+                Mostrando{" "}
+                <strong>
+                  {startIndex}-{endIndex}
+                </strong>{" "}
+                de <strong>{totalItems}</strong> candidatos{" "}
+                {/* Use variáveis reais aqui */}
               </div>
 
-              <div className="flex flex-wrap justify-center items-center gap-2 w-full md:w-auto">
+              {/* Container Principal dos Botões de Paginação */}
+              <div className="flex items-center gap-2 w-full md:w-auto justify-center">
+                {" "}
+                {/* Mantém centralizado e permite que os itens internos controlem o espaço */}
+                {/* Botão Anterior */}
                 <Button
                   variant="outline"
                   size="sm"
-                  disabled
-                  className="disabled:opacity-50 dark:text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800"
+                  disabled={currentPage === 1} // Desabilita se for a primeira página
+                  onClick={() => handlePageChange(currentPage - 1)} // Adiciona onClick
+                  className="disabled:opacity-50 dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800" // Estilo Padrão Outline
                 >
                   Anterior
                 </Button>
-
-                {/* Select para mobile */}
-                <Select defaultValue="1">
-                  <SelectTrigger className="w-24 h-8 md:hidden">
-                    <SelectValue placeholder="Página 1" />
-                  </SelectTrigger>
-                  <SelectContent className="dark:bg-zinc-900">
-                    <SelectItem value="1">Página 1</SelectItem>
-                    <SelectItem value="2">Página 2</SelectItem>
-                    <SelectItem value="3">Página 3</SelectItem>
-                    <SelectItem value="4">Página 4</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                {/* Botões numéricos para desktop */}
+                {/* Container Scrollável para Botões de Página (APENAS MOBILE) */}
+                <div className="flex-1 overflow-x-auto whitespace-nowrap md:hidden mx-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800">
+                  {/* Para estilizar a barra de scroll (opcional, requer plugin ou CSS customizado) */}
+                  {/* Exemplo: npm install -D tailwind-scrollbar */}
+                  {/* No tailwind.config.js: plugins: [require('tailwind-scrollbar')], */}
+                  <div className="inline-flex items-center gap-1 px-1">
+                    {" "}
+                    {/* Container interno para os botões */}
+                    {/* Renderiza os botões de página - PRECISA DE DADOS REAIS */}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (page) => (
+                        <Button
+                          key={page}
+                          variant={page === currentPage ? "outline" : "outline"}
+                          size="sm"
+                          className={cn(
+                            "w-8 h-8 p-0 flex-shrink-0", // Tamanho fixo e impede encolhimento
+                            "dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800", // Estilo padrão
+                            page === currentPage &&
+                              "bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-500 font-bold" // Estilo ativo
+                          )}
+                          onClick={() => handlePageChange(page)} // Adiciona onClick
+                        >
+                          {page}
+                        </Button>
+                      )
+                    )}
+                  </div>
+                </div>
+                {/* Botões Numéricos para Desktop (Mantidos como antes) */}
                 <div className="hidden md:flex items-center gap-2">
-                  {[1, 2, 3].map((page) => (
+                  {/* Lógica de renderização desktop (pode precisar ser dinâmica também) */}
+                  {[1, 2, 3].map(
+                    (
+                      page // Mantenha sua lógica atual ou adapte para ser dinâmica
+                    ) => (
+                      <Button
+                        key={page}
+                        variant={page === currentPage ? "outline" : "outline"}
+                        size="sm"
+                        className={cn(
+                          "w-8 h-8 p-0",
+                          "dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800",
+                          page === currentPage &&
+                            "bg-zinc-100 dark:bg-zinc-800 font-bold"
+                        )}
+                        onClick={() => handlePageChange(page)} // Adiciona onClick
+                      >
+                        {page}
+                      </Button>
+                    )
+                  )}
+                  {totalPages > 4 && ( // Exibe '...' se houver mais páginas que o limite inicial
+                    <span className="text-muted-foreground dark:text-gray-500 px-1">
+                      ...
+                    </span>
+                  )}
+                  {totalPages > 3 && ( // Exibe a última página se houver mais de 3
                     <Button
-                      key={page}
-                      variant={page === 1 ? "outline" : "outline"}
+                      variant="outline"
                       size="sm"
                       className={cn(
-                        "w-8 p-0 dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800",
-                        page === 1 && "bg-zinc-100 dark:bg-zinc-800"
+                        "w-8 h-8 p-0",
+                        "dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800",
+                        totalPages === currentPage &&
+                          "bg-zinc-100 dark:bg-zinc-800 font-bold"
                       )}
+                      onClick={() => handlePageChange(totalPages)} // Adiciona onClick
                     >
-                      {page}
+                      {totalPages}
                     </Button>
-                  ))}
-                  <span className="text-muted-foreground dark:text-gray-500">
-                    ...
-                  </span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-8 p-0 dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800"
-                  >
-                    4
-                  </Button>
+                  )}
                 </div>
-
+                {/* Botão Próxima */}
                 <Button
                   variant="outline"
                   size="sm"
-                  className="dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800"
+                  disabled={currentPage === totalPages} // Desabilita se for a última página
+                  onClick={() => handlePageChange(currentPage + 1)} // Adiciona onClick
+                  className="disabled:opacity-50 dark:text-white dark:border-zinc-600 hover:bg-zinc-100 hover:dark:bg-zinc-800" // Estilo Padrão Outline
                 >
                   Próxima
                 </Button>

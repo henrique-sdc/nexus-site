@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "src/components/ui/button";
 import { cn } from "src/lib/utils";
@@ -44,6 +44,7 @@ const tabOrder = ["basic", "resume", "experience", "education", "skills"];
 const ProfileCompletion: React.FC = () => {
   // --- Estado ---
   const [activeTab, setActiveTab] = useState<string>(tabOrder[0]);
+  const isInitialMount = useRef(true); // Ref para controlar a montagem inicial
 
   // Hook para navegação programática
   const navigate = useNavigate();
@@ -95,6 +96,18 @@ const ProfileCompletion: React.FC = () => {
     // Permite navegar para qualquer aba clicada (mais flexível)
     setActiveTab(value);
   };
+
+  // --- Hooks de Efeito ---
+  useEffect(() => {
+    // Verifica se NÃO é a montagem inicial
+    if (isInitialMount.current) {
+      isInitialMount.current = false; // Marca que a montagem inicial já ocorreu
+    } else {
+      // Rola para o topo instantaneamente sempre que a aba ativa mudar
+      window.scrollTo({ top: 0, behavior: "auto" });
+      // Ou a forma mais curta: window.scrollTo(0, 0);
+    }
+  }, [activeTab]); // Executa este efeito sempre que 'activeTab' mudar
 
   return (
     // Container principal: Fundo gradiente escuro (inspirado no Register)
