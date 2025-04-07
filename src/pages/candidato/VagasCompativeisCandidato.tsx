@@ -36,13 +36,6 @@ import {
   Search,
   Sliders,
 } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/components/ui/select";
 import Footer from "src/components/Footer/Footer";
 
 // --- Importações para Navegação (Opcional, descomentar se usar) ---

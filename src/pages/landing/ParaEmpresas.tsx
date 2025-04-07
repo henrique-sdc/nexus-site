@@ -445,7 +445,7 @@ export default function EmpresasPage() {
         </section>
 
         {/* Seção: Empresas Parceiras (Scrolling) */}
-        <section className="py-16 md:py-24 dark:bg-black overflow-hidden">
+        <section className="py-16 md:py-24 dark:bg-black overflow-hidden border-t border-gray-200 dark:border-zinc-700">
           <div className="container mx-auto px-4">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl dark:text-white">
@@ -457,7 +457,7 @@ export default function EmpresasPage() {
               </p>
             </div>
             <div className="relative w-full overflow-x-hidden">
-              <div className="animate-scroll-left">
+              <div className="animate-scroll-left flex flex-nowrap">
                 {" "}
                 {/* Lista de logos (duplicada para efeito infinito) - SEM o map() */}
                 <img
@@ -476,7 +476,7 @@ export default function EmpresasPage() {
                   className="h-12 w-auto dark:grayscale hover:grayscale-0 transition-all duration-300 mx-8"
                 />
                 <img
-                  src="https://www.intersector.com.br/wp-content/uploads/2020/12/logo-belas-artes.png"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjYLHBpgEwZYRgeU-pSbasC4TPQJhOYTt8w&s"
                   alt="Belas Artes"
                   className="h-12 w-auto dark:grayscale hover:grayscale-0 transition-all duration-300 mx-8"
                 />
@@ -502,7 +502,7 @@ export default function EmpresasPage() {
                   className="h-12 w-auto dark:grayscale hover:grayscale-0 transition-all duration-300 mx-8"
                 />
                 <img
-                  src="https://www.intersector.com.br/wp-content/uploads/2020/12/logo-belas-artes.png"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdjYLHBpgEwZYRgeU-pSbasC4TPQJhOYTt8w&s"
                   alt="Belas Artes"
                   className="h-12 w-auto dark:grayscale hover:grayscale-0 transition-all duration-300 mx-8"
                 />
@@ -517,7 +517,7 @@ export default function EmpresasPage() {
         </section>
 
         {/* Seção: Histórias de Sucesso */}
-        <section className="py-16 md:py-24 dark:bg-black">
+        <section className="py-16 md:py-24 dark:bg-black border-t border-gray-200 dark:border-zinc-700">
           <div className="container mx-auto px-4">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl dark:text-white">

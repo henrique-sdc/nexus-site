@@ -39,6 +39,7 @@ export const DashboardNavbar: React.FC<DashboardNavbarProps> = ({
 
       if (currentScroll <= 0) {
         setIsVisible(true);
+        setLastScrollY(0);
         return;
       }
 
@@ -86,6 +87,21 @@ export const DashboardNavbar: React.FC<DashboardNavbarProps> = ({
       return () => clearTimeout(timer);
     }
   }, [searchActive]);
+
+  useEffect(() => {
+    const forceVisible = () => {
+      // console.log("[Navbar] Evento forceNavbarVisible recebido!"); // Log para debug
+      setIsVisible(true);
+    };
+
+    window.addEventListener("forceNavbarVisible", forceVisible);
+
+    // Cleanup: remover o listener quando o componente desmontar
+    return () => {
+      window.removeEventListener("forceNavbarVisible", forceVisible);
+    };
+    // Adicione setIsVisible às dependências se o linter pedir
+  }, [setIsVisible]);
 
   return (
     <header

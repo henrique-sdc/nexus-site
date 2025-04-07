@@ -38,9 +38,6 @@ const Footer = () => {
       // Fallback para rolagem instantânea se smooth scroll não for suportado
       window.scrollTo(0, 0);
       // Dispara o evento imediatamente neste caso
-      console.log(
-        "[Footer] Disparando evento 'forceNavbarVisible' imediatamente (sem smooth)."
-      ); // Log para debug
       window.dispatchEvent(new CustomEvent("forceNavbarVisible"));
     }
   };

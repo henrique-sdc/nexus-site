@@ -60,6 +60,7 @@
     /* Define o fundo e a cor do texto com base nas variáveis */
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    @apply m-0; /* Garante que não haja margem no body */
   }
 
   /* Estilos de hover aplicados apenas em dispositivos que suportam hover (desktop) */

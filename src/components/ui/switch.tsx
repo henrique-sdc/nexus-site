@@ -11,7 +11,14 @@ function Switch({
     <SwitchPrimitive.Root
       data-slot="switch"
       className={cn(
-        "peer data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+        // --- Estilos Base ---
+        "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50",
+        // --- TAMANHO AJUSTADO ---
+        "h-6 w-11", // Aumentado: h-6 (24px), w-11 (44px) - Ajuste w- conforme necessário
+        // --- Cores de Fundo (MANUAIS) ---
+        "data-[state=unchecked]:bg-zinc-200", // Light Mode Unchecked
+        "dark:data-[state=unchecked]:bg-zinc-800", // Dark Mode Unchecked
+        "data-[state=checked]:bg-purple-700", // Light & Dark Mode Checked
         className
       )}
       {...props}
@@ -19,7 +26,19 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0"
+          // --- Estilos Base ---
+          "pointer-events-none block rounded-full shadow-lg ring-0 transition-transform",
+          // --- TAMANHO AJUSTADO ---
+          "size-5", // Aumentado: size-5 (20px)
+          // --- Cores do Thumb (MANUAIS) ---
+          "data-[state=unchecked]:bg-white", // Light Mode Unchecked (branco)
+          "dark:data-[state=unchecked]:bg-black", // Dark Mode Unchecked (cinza claro)
+          "data-[state=checked]:bg-white", // Light Mode Checked (branco)
+          "dark:data-[state=checked]:bg-black", // Dark Mode Checked (preto)
+          // --- Posicionamento (AJUSTADO PARA NOVO TAMANHO) ---
+          "data-[state=unchecked]:translate-x-0.5", // Pequeno offset inicial
+          "data-[state=checked]:translate-x-5" // Ajustado para w-11 e size-5
+          // "data-[state=checked]:translate-x-[calc(100%-2px)]"
         )}
       />
     </SwitchPrimitive.Root>

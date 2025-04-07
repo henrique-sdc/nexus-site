@@ -15,7 +15,15 @@ import {
 import { Input } from "src/components/ui/input";
 import { Badge } from "src/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "src/components/ui/avatar";
-import { Calendar, Clock, MapPin, Search, Send, Eye } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  Search,
+  Send,
+  Eye,
+  Trash2,
+} from "lucide-react";
 import Footer from "src/components/Footer/Footer";
 
 /**
@@ -94,6 +102,11 @@ export default function VagasSalvas() {
         skill.toLowerCase().includes(searchTerm.toLowerCase())
       )
   );
+
+  // Função para remover vaga salva
+  const handleRemoveSavedJob = (jobId: number) => {
+    console.log("Remover vaga salva com id:", jobId);
+  };
 
   return (
     <SidebarProvider>
@@ -268,24 +281,35 @@ export default function VagasSalvas() {
                           </div>
 
                           {/* Botões de Ação */}
-                          <div className="flex flex-col sm:flex-row gap-2 mt-2 md:mt-0 md:ml-4 flex-shrink-0">
+                          <div className="flex flex-col items-stretch sm:items-center sm:flex-row gap-2 mt-2 md:mt-0 md:ml-4 flex-shrink-0">
                             <Button
                               size="sm"
                               variant="outline"
                               className="gap-1 w-full sm:w-auto dark:text-white dark:border-zinc-600 hover:bg-zinc-200/70 hover:dark:bg-zinc-700"
                             >
                               <Eye className="h-4 w-4" />
-                              <span>Detalhes</span>
+                              <span className="sm:inline">Detalhes</span>{" "}
+                              {/* Mostrar texto se houver espaço */}
                             </Button>
                             <Button
                               size="sm"
-                              className="bg-purple-800 text-white hover:bg-purple-900 transition-all duration-200"
+                              className="bg-purple-800 text-white hover:bg-purple-900 transition-all duration-200 gap-1 w-full sm:w-auto"
                             >
                               <Send className="h-4 w-4" />
-                              <span>Aplicar</span>
+                              <span className="sm:inline">Aplicar</span>{" "}
+                              {/* Mostrar texto se houver espaço */}
                             </Button>
-                            {/* Opcional: Botão para remover dos salvos */}
-                            {/* <Button size="sm" variant="ghost" className="text-red-600 dark:text-red-500 hover:bg-red-100 dark:hover:bg-red-900/20 w-full sm:w-auto">Remover</Button> */}
+                            {/* ----- BOTÃO DE REMOVER ADICIONADO ----- */}
+                            <Button
+                              variant="ghost" // Aparência sutil
+                              size="icon" // Tamanho apenas para o ícone
+                              className="text-red-600 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-900/20 w-full sm:h-8 sm:w-8" // Cores destrutivas e ajuste de tamanho mobile/desktop
+                              aria-label="Remover vaga salva" // Acessibilidade
+                              onClick={() => handleRemoveSavedJob(job.id)} // Chama a função de remover
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                            {/* ----- FIM DO BOTÃO DE REMOVER ----- */}
                           </div>
                         </div>
                       </div>

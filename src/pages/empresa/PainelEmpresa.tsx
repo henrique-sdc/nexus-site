@@ -714,7 +714,7 @@ const DashboardEmpresa: React.FC = () => {
             </Tabs>
             {/* Paginação - COR BORDA TOP PADRONIZADA */}
             {/* Controles de Paginação */}
-            <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 pt-4 border-t dark:border-zinc-700">
+            <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 pt-4 mt-4 border-t dark:border-zinc-700">
               {/* Texto "Mostrando X-Y de Z" */}
               <div className="text-sm text-muted-foreground dark:text-gray-400 text-center md:text-left">
                 Mostrando{" "}
