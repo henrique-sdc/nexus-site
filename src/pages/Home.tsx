@@ -1,5 +1,6 @@
 // Importações de bibliotecas e componentes
 import { Link } from "react-router-dom";
+import { cn } from "src/lib/utils";
 import { Button } from "src/components/ui/button";
 import { FileCheck, Brain, Building2, ArrowRight } from "lucide-react";
 
@@ -24,8 +25,8 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Seção do Banner Principal */}
-        <section className="relative overflow-hidden py-24 md:py-32">
-          {/* Fundo para modo claro */}
+        {/* Fundo para modo claro */}
+        <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 dark:hidden -z-10"></div>
           {/* Fundo para modo escuro */}
           <div className="absolute inset-0 hidden dark:block -z-10">
@@ -40,35 +41,43 @@ export default function Home() {
           </div>
 
           <div className="container mx-auto px-4 relative">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-20 items-center">
-              {/* Conteúdo textual do banner */}
-              <div className="space-y-6">
+            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
+              <div className="space-y-6 text-center lg:text-left">
                 <div className="inline-block rounded-lg bg-purple-100 dark:bg-purple-500/30 px-3 py-1 text-sm dark:text-white">
                   Revolucionando o Recrutamento
                 </div>
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl dark:text-white">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">
                   Unificando o Recrutamento com{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 pr-0.5">
                     Conexões Potencializadas por IA
                   </span>
                 </h1>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-stone-200">
+                <p className="text-lg text-muted-foreground md:text-xl dark:text-stone-200 max-w-2xl mx-auto lg:mx-0">
                   Um perfil. Uma avaliação. Oportunidades sem fim. Nexus conecta
                   candidatos qualificados com os empregadores ideais por meio de
                   correspondência inteligente.
                 </p>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <div className="flex flex-col gap-3 md:flex-row md:gap-4 justify-center lg:justify-start">
                   <Button
-                    className="bg-purple-800 text-white hover:bg-purple-900 transition-all duration-200 px-24 py-6"
+                    className={cn(
+                      "bg-purple-800 text-white hover:bg-purple-900 transition-all duration-200",
+                      "px-6",
+                      "sm:px-8",
+                      "lg:px-24"
+                    )}
                     size="lg"
                     asChild
                   >
                     <Link to="/cadastro">Comece Agora</Link>
                   </Button>
                   <Button
-                    className="bg-white dark:bg-black dark:border-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all duration-200 px-24 py-6"
+                    className={cn(
+                      "bg-white dark:bg-black dark:border-zinc-700 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all duration-200",
+                      "px-6",
+                      "sm:px-8",
+                      "lg:px-24"
+                    )}
                     size="lg"
-                    variant="outline"
                     asChild
                   >
                     <Link to="/para-empresas">Para Empresas</Link>
@@ -77,16 +86,16 @@ export default function Home() {
               </div>
 
               {/* Imagem do banner */}
-              <div className="relative md:aspect-auto">
+              <div className="relative max-w-lg mx-auto lg:max-w-none lg:mx-0">
                 {/* Efeito de fundo para a imagem gradiente com blur */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-full blur-3xl -z-10"></div>
-                <div className="relative bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 p-6 rounded-2xl border border-purple-200/50 dark:border-purple-800/50 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-700/20 dark:to-indigo-700/20 rounded-full blur-3xl -z-10"></div>
+                <div className="relative bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 p-4 sm:p-6 rounded-2xl border border-purple-200/50 dark:border-purple-800/50 backdrop-blur-sm">
                   <img
                     src={imagemTelemarketing}
                     width={800}
                     height={400}
                     alt="Plataforma Nexus"
-                    className="rounded-xl"
+                    className="rounded-xl w-full h-auto object-cover"
                   />
                 </div>
               </div>
@@ -310,7 +319,7 @@ export default function Home() {
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950 dark:to-indigo-950/60 -z-20"></div>
           <div className="hidden dark:block absolute inset-0 bg-black opacity-50 -z-10"></div>
-          <div className="container mx-auto px-4 relative flex items-center justify-center min-h-[50vh]">
+          <div className="container mx-auto px-4 relative flex items-center justify-center min-h-[50vh] py-16 md:py-20">
             <div className="mx-auto max-w-[800px] space-y-6 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl dark:text-white">
                 Pronto para Transformar Sua Experiência de Recrutamento?
@@ -319,7 +328,7 @@ export default function Home() {
                 Junte-se à Nexus hoje e descubra uma maneira mais inteligente de
                 conectar talentos com oportunidades.
               </p>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
+              <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
                 <Button
                   size="lg"
                   asChild
